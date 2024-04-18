@@ -1,3 +1,9 @@
-.envrc
-.direnv
+!.gitignore
+!.pre-commit-config.yaml
+!README.md
+!commitlint.config.js
+!flake.lock
+!flake.nix
+
+*
 

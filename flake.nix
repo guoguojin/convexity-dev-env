@@ -26,6 +26,7 @@
           gotests
           gomodifytags
           impl
+          firebase-tools
         ];
 
         shellHook = ''
@@ -42,6 +43,9 @@
 
           export GOROOT=$(nix path-info nixpkgs#go_1_21)/share/go
           export GOPATH=$SHELL_PATH/go
+          if [ ! -d $GOPATH ]; then
+            mkdir -p $GOPATH
+          fi
 
           export PATH=$GOPATH/bin:$PATH
           export GOPRIVATE="github.com/convexity-io"

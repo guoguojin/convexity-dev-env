@@ -14,7 +14,7 @@
         buildInputs = with pkgs; [
           delve
           ripgrep
-          go_1_21
+          go
           gopls
           golangci-lint
           gnumake
@@ -41,14 +41,14 @@
             mkdir -p $SHELL_PATH
           fi
 
-          export GOROOT=$(nix path-info nixpkgs#go_1_21)/share/go
+          export GOROOT=$(nix path-info nixpkgs#go)/share/go
           export GOPATH=$SHELL_PATH/go
           if [ ! -d $GOPATH ]; then
             mkdir -p $GOPATH
           fi
 
           export PATH=$GOPATH/bin:$PATH
-          export GOPRIVATE="github.com/convexity-io"
+          export GOPRIVATE="github.com/dora-network"
 
           if [ -f go.mod ]; then
             echo "Found go.mod, running tidy"

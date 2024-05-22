@@ -29,6 +29,13 @@
           firebase-tools
         ];
 
+        # CGO runtime header file has a warning about compiling with optimizations which will
+        # prevent CGO from running inside a flake based nix shell.
+        # To work around this, we need to disable the hardening requirement for the shell
+        # or set the environment variable CGO_ENABLED=0 and disable CGO.
+        # As we don't know yet if we will need CGO, we have chosen to just disable the hardening for the shell
+        hardeningDisable = [ "fortify" ]; # so that delve will work
+
         shellHook = ''
           if [ -z $XDG_CACHE ]; then
             echo "Setting XDG_CACHE to $HOME/.cache"

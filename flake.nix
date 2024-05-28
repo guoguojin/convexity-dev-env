@@ -8,7 +8,27 @@
 
   outputs = { self, nixpkgs, flake-utils }:
   flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
+      let 
+        pkgs = import nixpkgs { inherit system; };
+        gdk = pkgs.google-cloud-sdk.withExtraComponents( with pkgs.google-cloud-sdk.components; [
+          # components you need can be found here: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/tools/admin/google-cloud-sdk/components.json
+          gke-gcloud-auth-plugin
+          cloud-spanner-emulator
+          cloud-firestore-emulator
+          docker-credential-gcr
+          spanner-migration-tool
+          gsutil
+          gcloud-crc32c
+          gcloud-deps
+          gcloud-man-pages
+          kpt
+          kubectl
+          kustomize
+          log-streaming
+          minikube
+          skaffold
+          tests
+        ]);
     in {
       devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [
@@ -27,6 +47,7 @@
           gomodifytags
           impl
           firebase-tools
+          gdk
         ];
 
         # CGO runtime header file has a warning about compiling with optimizations which will

@@ -40,7 +40,6 @@
           gnumake
           pre-commit
           diffutils
-          buf
           gofumpt
           gotools
           gotests
@@ -77,6 +76,7 @@
 
           export PATH=$GOPATH/bin:$PATH
           export GOPRIVATE="github.com/dora-network"
+          export SPANNER_EMULATOR_HOST=localhost:9010
 
           if [ -f go.mod ]; then
             echo "Found go.mod, running tidy"

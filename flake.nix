@@ -47,6 +47,7 @@
           impl
           firebase-tools
           gdk
+          buf
         ];
 
         # CGO runtime header file has a warning about compiling with optimizations which will
